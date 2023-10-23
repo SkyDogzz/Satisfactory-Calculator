@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Core\Sql;
-use App\Models\Users;
+use App\Core\Controller;
 
-class Home
+class Home extends Controller
 {
     public function index()
     {
-        var_dump(Sql::testConnection());
+
+        $this->view('home/index');
+
     }
 }
