@@ -4,7 +4,7 @@ namespace App;
 
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
-    $base_dir = __DIR__ . '/src/';
+    $base_dir = __DIR__ . '/';
 
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
@@ -33,3 +33,15 @@ else {
     $controller = 'App\\Controllers\\' . ucfirst($uri[0]) . 'Controller';
     $action = $uri[1] ?? 'index';
 }
+
+if (!class_exists($controller)) {
+    echo 'Controller ' . $controller . ' not found!';
+}
+
+$controller = new $controller;
+
+if (!method_exists($controller, $action)) {
+    echo 'Action ' . $action . ' not found!';
+}
+
+$controller->$action();
