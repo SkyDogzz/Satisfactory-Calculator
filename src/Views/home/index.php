@@ -9,22 +9,26 @@
         
         const steps = [];
         
-        async function findIngredients(itemName) {
+        async function findIngredients(itemName, quantityNeeded) {
             const item = data.item.find(i => i.name === itemName);
             if (item && item.recipe && item.recipe.ingredients.length > 0) {
+                const step = {
+                    output: item.name,
+                    ingredients: [],
+                    machine: item.recipe.machine
+                };
                 for (const ingredient of item.recipe.ingredients) {
-                    steps.push({
-                        output: item.name,
-                        input: ingredient.item,
-                        quantity: ingredient.quantity,
-                        machine: item.recipe.machine
+                    step.ingredients.push({
+                        name: ingredient.item,
+                        quantity: ingredient.quantity * quantityNeeded
                     });
-                    await findIngredients(ingredient.item);  // Recursively find ingredients
+                    await findIngredients(ingredient.item, ingredient.quantity * quantityNeeded);
                 }
+                steps.push(step);
             }
         }
         
-        await findIngredients(targetItem);
+        await findIngredients(targetItem, 1);
         
         return steps;
     }
