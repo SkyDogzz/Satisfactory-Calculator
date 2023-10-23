@@ -7,9 +7,9 @@ use Dotenv\Dotenv;
 class Sql
 {
     private static $instance = null;
-    private $pdo;
+    protected $pdo;
 
-    private function __construct()
+    protected function __construct()
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
         $dotenv->load();
@@ -45,11 +45,6 @@ class Sql
     public static function testConnection()
     {
         $sql = Sql::getInstance();
-        try {
-            $sql->query('SELECT * FROM users');
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
+        return $sql->query('SHOW TABLES')->fetchAll();
     }
 }

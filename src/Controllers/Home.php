@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Sql;
+use App\Models\Users;
 
 class Home
 {
