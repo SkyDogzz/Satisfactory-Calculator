@@ -14,7 +14,7 @@ services:
       - db
 
   db:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
@@ -25,7 +25,8 @@ services:
       - "${MYSQL_PORT}:3306"
   
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:5.2.1-apache
+    platform: linux/arm64/v8
     container_name: phpmyadmin
     environment:
       - PMA_HOST=db
