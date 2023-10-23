@@ -1,9 +1,42 @@
 <h1>Home</h1>
+<select id="item-select" onchange="getSelectedProductionSteps()">
+    <option value="" disabled selected>Select an item</option>
+    <!-- Les options seront remplis par JavaScript -->
+</select>
+
+<div id="content"></div>
+
 <script>
-    async function getProductionSteps(targetItem) {
+    async function fetchItems() {
         const response = await fetch('public/contents/satisfactory/items.json');
-        const data = await response.json();
-        
+        return response.json();
+    }
+
+    fetchItems().then(data => {
+        const selectElement = document.getElementById('item-select');
+        data.item.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.textContent = item.name;
+            selectElement.appendChild(option);
+        });
+    });
+
+    async function getSelectedProductionSteps() {
+        const contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = ''; 
+        const selectElement = document.getElementById('item-select');
+        const selectedItem = selectElement.value;
+        if (selectedItem) {
+            console.log(selectedItem);
+            await getProductionSteps(selectedItem);
+        }
+    }
+
+    async function getProductionSteps(targetItem) {
+        const data = await fetchItems();
+        const response = await fetch('public/contents/satisfactory/items.json');
+
         function createList(itemName, quantityNeeded) {
             const item = data.item.find(i => i.name === itemName);
             if (item && item.recipe && item.recipe.ingredients.length > 0) {
@@ -31,8 +64,9 @@
         topLevelItem.appendChild(createList(targetItem, 1));
         topLevelList.appendChild(topLevelItem);
         contentDiv.appendChild(topLevelList);
+
     }
-    
-    getProductionSteps('Reinforced Iron Plate');
+
+    // Si vous souhaitez charger les étapes de production pour un item par défaut au chargement de la page :
+    // window.onload = () => getProductionSteps('Reinforced Iron Plate');
 </script>
-<div id="content"></div>
