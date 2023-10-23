@@ -2,10 +2,11 @@ version: '3.1'
 
 services:
   web:
-    image: php:8.2-apache
+    build: .
     container_name: php-apache
     volumes:
       - ./src:/var/www/html
+      - ./.env:/var/www/html/.env
     ports:
       - "${APACHE_PORT}:80"
     environment:
