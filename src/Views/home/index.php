@@ -1,5 +1,4 @@
 <h1>Home</h1>
-
 <script>
     async function getProductionSteps(targetItem) {
         const response = await fetch('public/contents/satisfactory/items.json');
@@ -11,7 +10,7 @@
                 const ul = document.createElement('ul');
                 for (const ingredient of item.recipe.ingredients) {
                     const li = document.createElement('li');
-                    li.textContent = `${ingredient.item}`;
+                    li.textContent = `${ingredient.item} (Crafted: ${ingredient.quantity * quantityNeeded})`;
                     li.appendChild(createList(ingredient.item, ingredient.quantity * quantityNeeded));  // Recursively create lists
                     ul.appendChild(li);
                 }
@@ -23,7 +22,7 @@
         const contentDiv = document.getElementById('content');
         const topLevelList = document.createElement('ul');
         const topLevelItem = document.createElement('li');
-        topLevelItem.textContent = targetItem;
+        topLevelItem.textContent = `${targetItem} (Crafted: 1)`;
         topLevelItem.appendChild(createList(targetItem, 1));
         topLevelList.appendChild(topLevelItem);
         contentDiv.appendChild(topLevelList);

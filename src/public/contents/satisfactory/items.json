@@ -35,12 +35,12 @@
                 "ingredients": [
                     {
                         "item": "Iron Ingot",
-                        "quantity": 1
+                        "quantity": 3
                     }
                 ],
                 "output": {
                     "item": "Iron Plate",
-                    "quantity": 1
+                    "quantity": 2
                 },
                 "production_time": 3.5,
                 "machine": "Constructor"
