@@ -98,7 +98,7 @@
                 ],
                 "output": {
                     "item": "Screw",
-                    "quantity": 6
+                    "quantity": 4
                 },
                 "production_time": 4,
                 "machine": "Constructor"
