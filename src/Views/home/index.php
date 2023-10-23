@@ -4,6 +4,8 @@
     <!-- Les options seront remplis par JavaScript -->
 </select>
 
+<input type="number" id="quantity-input" value="1" min="1" oninput="getSelectedProductionSteps()">
+
 <div id="content"></div>
 
 <script>
@@ -27,15 +29,17 @@
         contentDiv.innerHTML = ''; 
         const selectElement = document.getElementById('item-select');
         const selectedItem = selectElement.value;
-        if (selectedItem) {
+        const quantityInput = document.getElementById('quantity-input');
+        const quantity = parseInt(quantityInput.value, 10);
+        console.log(quantity);
+        if (selectedItem && quantity > 0) {
             console.log(selectedItem);
-            await getProductionSteps(selectedItem);
+            await getProductionSteps(selectedItem, quantity);
         }
     }
 
-    async function getProductionSteps(targetItem) {
+    async function getProductionSteps(targetItem, quantity) {
         const data = await fetchItems();
-        const response = await fetch('public/contents/satisfactory/items.json');
 
         function createList(itemName, quantityNeeded) {
             const item = data.item.find(i => i.name === itemName);
@@ -60,11 +64,10 @@
         const contentDiv = document.getElementById('content');
         const topLevelList = document.createElement('ul');
         const topLevelItem = document.createElement('li');
-        topLevelItem.textContent = `1 ${targetItem}`;
-        topLevelItem.appendChild(createList(targetItem, 1));
+        topLevelItem.textContent = `${quantity} ${targetItem}`;
+        topLevelItem.appendChild(createList(targetItem, quantity));  // Pass the quantity here
         topLevelList.appendChild(topLevelItem);
         contentDiv.appendChild(topLevelList);
-
     }
 
     // Si vous souhaitez charger les étapes de production pour un item par défaut au chargement de la page :
