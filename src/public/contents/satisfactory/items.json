@@ -1,0 +1,129 @@
+{
+    "item": [
+        {
+            "name": "Reinforced Iron Plate",
+            "category": "Intermediate Product",
+            "description": "A strong, versatile material made out of Iron Plates reinforced with Screws.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Plate",
+                        "quantity": 6
+                    },
+                    {
+                        "item": "Screw",
+                        "quantity": 12
+                    }
+                ],
+                "output": {
+                    "item": "Reinforced Iron Plate",
+                    "quantity": 1
+                },
+                "production_time": 30,
+                "machine": "Assembler"
+            }
+        },
+        {
+            "name": "Iron Plate",
+            "category": "Intermediate Product",
+            "description": "A flat and basic component made of Iron Ingots.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Ingot",
+                        "quantity": 1
+                    }
+                ],
+                "output": {
+                    "item": "Iron Plate",
+                    "quantity": 1
+                },
+                "production_time": 3.5,
+                "machine": "Constructor"
+            }
+        },
+        {
+            "name": "Iron Ingot",
+            "category": "Intermediate Product",
+            "description": "A chunk of pure Iron.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Ore",
+                        "quantity": 1
+                    }
+                ],
+                "output": {
+                    "item": "Iron Ingot",
+                    "quantity": 1
+                },
+                "production_time": 3.5,
+                "machine": "Smelter"
+            }
+        },
+        {
+            "name": "Iron Ore",
+            "category": "Raw Resource",
+            "description": "A chunk of Iron-rich rock.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "N/A",
+                "ingredients": [],
+                "output": {
+                    "item": "Iron Ore",
+                    "quantity": 1
+                },
+                "production_time": 0,
+                "machine": "N/A"
+            }
+        },
+        {
+            "name": "Screw",
+            "category": "Intermediate Product",
+            "description": "A simple screw, used for basic construction.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Rod",
+                        "quantity": 1
+                    }
+                ],
+                "output": {
+                    "item": "Screw",
+                    "quantity": 6
+                },
+                "production_time": 4,
+                "machine": "Constructor"
+            }
+        },
+        {
+            "name": "Iron Rod",
+            "category": "Intermediate Product",
+            "description": "A simple rod made of pure Iron.",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Ingot",
+                        "quantity": 1
+                    }
+                ],
+                "output": {
+                    "item": "Iron Rod",
+                    "quantity": 1
+                },
+                "production_time": 3.5,
+                "machine": "Constructor"
+            }
+        }
+    ]
+}
