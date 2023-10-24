@@ -1,4 +1,4 @@
-import fetchItems from '/public/js/fetchItems.js';
+import fetchItems from './fetchItems.js';
 
 export default async function getProductionSteps(targetItem, quantity) {
     const data = await fetchItems();

@@ -1,4 +1,4 @@
-import getProductionSteps from '/public/js/getProductionSteps.js';
+import getProductionSteps from './getProductionSteps.js';
 
 export default async function getSelectedProductionSteps() {
     const contentDiv = document.getElementById('content');
