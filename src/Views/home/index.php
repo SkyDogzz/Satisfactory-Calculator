@@ -1,19 +1,18 @@
 <h1>Home</h1>
-<select id="item-select" onchange="getSelectedProductionSteps()">
+<select id="item-select">
     <option value="" disabled selected>Select an item</option>
     <!-- Les options seront remplis par JavaScript -->
 </select>
 
-<input type="number" id="quantity-input" value="1" min="1" oninput="getSelectedProductionSteps()">
+<input type="number" id="quantity-input" value="1" min="1">
 
 <div id="content"></div>
 
-<script>
-    async function fetchItems() {
-        const response = await fetch('public/contents/satisfactory/items.json');
-        return response.json();
-    }
-
+<script type="module">
+    import fetchItems from '/public/js/fetchItems.js';
+    import getSelectedProductionSteps from '/public/js/getSelectedProductionSteps.js';
+    import getProductionSteps from '/public/js/getProductionSteps.js';
+    
     fetchItems().then(data => {
         const selectElement = document.getElementById('item-select');
         data.item.forEach(item => {
@@ -24,52 +23,6 @@
         });
     });
 
-    async function getSelectedProductionSteps() {
-        const contentDiv = document.getElementById('content');
-        contentDiv.innerHTML = ''; 
-        const selectElement = document.getElementById('item-select');
-        const selectedItem = selectElement.value;
-        const quantityInput = document.getElementById('quantity-input');
-        const quantity = parseInt(quantityInput.value, 10);
-        console.log(quantity);
-        if (selectedItem && quantity > 0) {
-            console.log(selectedItem);
-            await getProductionSteps(selectedItem, quantity);
-        }
-    }
-
-    async function getProductionSteps(targetItem, quantity) {
-        const data = await fetchItems();
-
-        function createList(itemName, quantityNeeded) {
-            const item = data.item.find(i => i.name === itemName);
-            if (item && item.recipe && item.recipe.ingredients.length > 0) {
-                const ul = document.createElement('ul');
-                const outputQuantityPerRecipe = item.recipe.output.quantity;
-                // Calculating the number of recipes required
-                const recipesRequired = Math.ceil(quantityNeeded / outputQuantityPerRecipe);
-                for (const ingredient of item.recipe.ingredients) {
-                    const li = document.createElement('li');
-                    // Adjusting the ingredient quantity based on the number of recipes required
-                    const ingredientQuantity = ingredient.quantity * recipesRequired;
-                    li.textContent = `${ingredientQuantity} ${ingredient.item}`;
-                    li.appendChild(createList(ingredient.item, ingredientQuantity));  // Recursively create lists
-                    ul.appendChild(li);
-                }
-                return ul;
-            }
-            return document.createElement('ul');  // Return an empty list if there are no ingredients
-        }
-        
-        const contentDiv = document.getElementById('content');
-        const topLevelList = document.createElement('ul');
-        const topLevelItem = document.createElement('li');
-        topLevelItem.textContent = `${quantity} ${targetItem}`;
-        topLevelItem.appendChild(createList(targetItem, quantity));  // Pass the quantity here
-        topLevelList.appendChild(topLevelItem);
-        contentDiv.appendChild(topLevelList);
-    }
-
-    // Si vous souhaitez charger les étapes de production pour un item par défaut au chargement de la page :
-    // window.onload = () => getProductionSteps('Reinforced Iron Plate');
+    document.getElementById('item-select').onchange = getSelectedProductionSteps;
+    document.getElementById('quantity-input').oninput = getSelectedProductionSteps;
 </script>
