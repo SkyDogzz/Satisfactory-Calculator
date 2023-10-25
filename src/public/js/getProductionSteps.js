@@ -8,7 +8,17 @@ export default async function getProductionSteps(targetItem, quantity) {
             const item = data.item.find(i => i.name === itemName);
             if (item && item.recipe && item.recipe.ingredients.length > 0) {
                 const ul = document.createElement('ul');
-                const outputQuantityPerRecipe = item.recipe.output.quantity;
+                let outputQuantityPerRecipe = 0;
+                if (item.recipe.outputs.length > 1) {
+                    for (let i = 0; i < item.recipe.outputs.length; i++) {
+                        if (item.recipe.outputs[i].item === item.name) {
+                            outputQuantityPerRecipe = item.recipe.outputs[i].quantity;
+                        }
+                    }
+                }
+                else {
+                    outputQuantityPerRecipe = item.recipe.outputs[0].quantity;
+                }
 
                 // Calculating the number of recipes required
                 const recipesRequired = quantityNeeded / outputQuantityPerRecipe;  // Changed from Math.ceil to simple division

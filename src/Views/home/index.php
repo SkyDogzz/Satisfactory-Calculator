@@ -42,6 +42,7 @@ function populateSelects(data) {
 function addCraft() {
     const craftContainer = document.getElementById('craft-container');
     const newCraftItem = document.querySelector('.craft-item').cloneNode(true);
+    newCraftItem.querySelector('.quantity-input').value = '1';
     craftContainer.appendChild(newCraftItem);
 }
 

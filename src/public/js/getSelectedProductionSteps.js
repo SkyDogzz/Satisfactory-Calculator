@@ -11,10 +11,8 @@ export default async function getSelectedProductionSteps() {
             const selectedItem = selectElement.value;
             const quantityInput = craftItem.querySelector('.quantity-input');
             const quantity = parseInt(quantityInput.value, 10);
-            console.log(quantity);
             
             if (selectedItem && quantity > 0) {
-                console.log(selectedItem);
                 await getProductionSteps(selectedItem, quantity);
             }
         }

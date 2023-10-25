@@ -17,10 +17,12 @@
                         "quantity": 12
                     }
                 ],
-                "output": {
-                    "item": "Reinforced Iron Plate",
-                    "quantity": 1
-                },
+                "outputs": [
+                    {
+                        "item": "Reinforced Iron Plate",
+                        "quantity": 1
+                    }
+                ],
                 "production_time": 30,
                 "machine": "Assembler"
             }
@@ -38,10 +40,12 @@
                         "quantity": 3
                     }
                 ],
-                "output": {
-                    "item": "Iron Plate",
-                    "quantity": 2
-                },
+                "outputs": [
+                    {
+                        "item": "Iron Plate",
+                        "quantity": 2
+                    }
+                ],
                 "production_time": 3.5,
                 "machine": "Constructor"
             }
@@ -59,10 +63,12 @@
                         "quantity": 1
                     }
                 ],
-                "output": {
-                    "item": "Iron Ingot",
-                    "quantity": 1
-                },
+                "outputs": [
+                    {
+                        "item": "Iron Ingot",
+                        "quantity": 1
+                    }
+                ],
                 "production_time": 3.5,
                 "machine": "Smelter"
             }
@@ -75,10 +81,12 @@
             "recipe": {
                 "name": "N/A",
                 "ingredients": [],
-                "output": {
-                    "item": "Iron Ore",
-                    "quantity": 1
-                },
+                "outputs": [
+                    {
+                        "item": "Iron Ore",
+                        "quantity": 1
+                    }
+                ],
                 "production_time": 0,
                 "machine": "N/A"
             }
@@ -96,10 +104,12 @@
                         "quantity": 1
                     }
                 ],
-                "output": {
-                    "item": "Screw",
-                    "quantity": 4
-                },
+                "outputs": [
+                    {
+                        "item": "Screw",
+                        "quantity": 4
+                    }
+                ],
                 "production_time": 4,
                 "machine": "Constructor"
             }
@@ -117,10 +127,38 @@
                         "quantity": 1
                     }
                 ],
-                "output": {
-                    "item": "Iron Rod",
-                    "quantity": 1
-                },
+                "outputs": [
+                    {
+                        "item": "Iron Rod",
+                        "quantity": 1
+                    }
+                ],
+                "production_time": 3.5,
+                "machine": "Constructor"
+            }
+        },
+        {
+            "name": "Iron Rod 2",
+            "category": "Intermediate Product",
+            "icon": "URL_to_icon_image",
+            "recipe": {
+                "name": "Standard Recipe",
+                "ingredients": [
+                    {
+                        "item": "Iron Ingot",
+                        "quantity": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "item": "Iron Rod 2",
+                        "quantity": 1
+                    },
+                    {
+                        "item": "Iron Plate",
+                        "quantity": 1
+                    }
+                ],
                 "production_time": 3.5,
                 "machine": "Constructor"
             }
