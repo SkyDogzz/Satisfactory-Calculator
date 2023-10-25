@@ -1,7 +1,19 @@
 import fetchItems from './fetchItems.js';
 
+function appendItemList(data) {
+    const ul = document.createElement('ul');
+    data.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.quantity + ' ' + item.name;
+        ul.appendChild(li);
+    });
+    return ul;
+}
+
+
 export default async function getProductionSteps(targetItem, quantity) {
     try {
+        let all = []
         const data = await fetchItems();
 
         function createList(itemName, quantityNeeded) {
@@ -32,6 +44,20 @@ export default async function getProductionSteps(targetItem, quantity) {
                     // Format the number to 2 decimal places if it's not a whole number
                     const formattedQuantity = (ingredientQuantity % 1 === 0) ? ingredientQuantity : ingredientQuantity.toFixed(2);
 
+                    let added = false;
+                    all.forEach(item => {
+                        if (item.name === ingredient.item) {
+                            item.quantity += ingredientQuantity
+                            added = true
+                        }
+                    })
+                    if (!added) {
+                        all.push({
+                            name: ingredient.item,
+                            quantity: ingredientQuantity
+                        })
+                    }
+
                     li.textContent = `${formattedQuantity} ${ingredient.item}`;
                     li.appendChild(createList(ingredient.item, ingredientQuantity));  // Recursively create lists
                     ul.appendChild(li);
@@ -48,6 +74,10 @@ export default async function getProductionSteps(targetItem, quantity) {
         topLevelItem.appendChild(createList(targetItem, quantity));  // Pass the quantity here
         topLevelList.appendChild(topLevelItem);
         contentDiv.appendChild(topLevelList);
+
+        // append the item list
+        const itemList = appendItemList(all);
+        contentDiv.appendChild(itemList);
     } catch (error) {
         console.error('There was an error in getProductionSteps:', error.message);
         // Optionally, display an error message to the user
